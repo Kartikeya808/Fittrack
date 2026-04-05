@@ -16,13 +16,7 @@ const app = express();
 
 app.use(
   cors({
-    origin(origin, callback) {
-      if (!origin || env.clientUrls.includes(origin)) {
-        return callback(null, true);
-      }
-
-      return callback(new Error(`Origin not allowed by CORS: ${origin}`));
-    },
+    origin: env.clientUrl,
     credentials: true,
   })
 );

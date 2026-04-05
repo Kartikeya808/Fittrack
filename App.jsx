@@ -1,14 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import ProtectedRoute from './components/ProtectedRoute';
-import Layout from './components/Layout';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import Dashboard from './pages/Dashboard';
-import WorkoutPage from './pages/WorkoutPage';
-import LogWorkout from './pages/LogWorkout';
-import GoalsPage from './pages/GoalsPage';
-import ProgressPage from './pages/ProgressPage';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+
+import Layout from './src/components/Layout';
+import ProtectedRoute from './src/components/ProtectedRoute.jsx';
+import { AuthProvider } from './src/context/AuthContext';
+import Dashboard from './src/pages/Dashboard';
+import GoalsPage from './src/pages/GoalsPage';
+import LogWorkout from './src/pages/LogWorkout';
+import LoginPage from './src/pages/LoginPage';
+import ProgressPage from './src/pages/ProgressPage';
+import RegisterPage from './src/pages/RegisterPage';
+import WorkoutPage from './src/pages/WorkoutPage';
 
 export default function App() {
   return (

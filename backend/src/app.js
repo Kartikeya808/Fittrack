@@ -13,10 +13,24 @@ import statsRoutes from './routes/stats.routes.js';
 import workoutRoutes from './routes/workout.routes.js';
 
 const app = express();
+const allowedOrigins = Array.from(
+  new Set([
+    ...env.clientUrls,
+    ...env.clientUrls.map((url) => url.replace('://localhost', '://127.0.0.1')),
+    ...env.clientUrls.map((url) => url.replace('://127.0.0.1', '://localhost')),
+  ])
+);
 
 app.use(
   cors({
-    origin: env.clientUrl,
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error('Not allowed by CORS'));
+    },
     credentials: true,
   })
 );

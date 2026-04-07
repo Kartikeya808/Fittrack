@@ -64,17 +64,18 @@ export default function ProgressPage() {
               />
               <Tooltip
                 contentStyle={{
-                  background: '#1A1A1A',
-                  border: 'none',
-                  borderRadius: '8px',
-                  color: '#fff',
+                  background: '#FFFFFF',
+                  border: '1px solid #D9E2EC',
+                  borderRadius: '14px',
+                  color: '#0F172A',
                   fontSize: '0.8rem',
-                  padding: '8px 12px',
+                  padding: '10px 12px',
+                  boxShadow: '0 18px 38px rgba(15, 23, 42, 0.12)',
                 }}
-                itemStyle={{ color: '#fff' }}
-                cursor={{ fill: 'rgba(0,0,0,0.04)' }}
+                itemStyle={{ color: '#0F172A' }}
+                cursor={{ fill: 'rgba(148, 163, 184, 0.16)' }}
               />
-              <Bar dataKey="minutes" fill="#1A1A1A" radius={[4, 4, 0, 0]} maxBarSize={40} />
+              <Bar dataKey="minutes" fill="#0F172A" radius={[8, 8, 0, 0]} maxBarSize={40} />
             </BarChart>
           </ResponsiveContainer>
         )}
@@ -119,7 +120,7 @@ export default function ProgressPage() {
         <span className="section-title">Recent Achievements</span>
       </div>
 
-      <ul className="achievements-list">
+      <ul className="achievements-list card">
         {summary.totalSessions >= 1 && (
           <li className="achievement-item">
             <div className="achievement-icon">

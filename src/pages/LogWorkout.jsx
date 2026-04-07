@@ -57,13 +57,13 @@ export default function LogWorkout() {
   if (success) {
     return (
       <div>
-        <div className="log-header">
+        <div className="page-header log-header">
           <h1>Log Workout</h1>
         </div>
-        <div className="success-message">
+        <div className="success-message card">
           <h3>Workout saved successfully</h3>
           <p>Your {form.type} session has been logged.</p>
-          <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
+          <div className="success-actions">
             <button className="btn btn-primary" onClick={() => { setSuccess(false); setForm({ type: '', duration: '', intensity: 'Med', date: new Date().toISOString().split('T')[0], calories: '', notes: '' }); }}>
               Log Another
             </button>
@@ -78,10 +78,10 @@ export default function LogWorkout() {
 
   return (
     <div>
-      <div className="log-header">
+      <div className="page-header page-header-row log-header">
         <div>
           <h1>Log Workout</h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: 4 }}>Enter workout details</p>
+          <p>Capture the key details from your latest session in one clean entry form.</p>
         </div>
         <button className="close-btn" onClick={() => navigate('/workout')}>
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -90,7 +90,7 @@ export default function LogWorkout() {
 
       {error && <div className="alert alert-error" style={{ marginTop: 16 }}>{error}</div>}
 
-      <form className="log-form" onSubmit={handleSubmit}>
+      <form className="log-form card" onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="form-label">Workout Type</label>
           <select className="form-input" value={form.type} onChange={(e) => handleChange('type', e.target.value)}>

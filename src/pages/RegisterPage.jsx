@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import BrandLogo from '../components/BrandLogo';
 import './Auth.css';
 
 export default function RegisterPage() {
@@ -41,9 +42,14 @@ export default function RegisterPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        <div className="auth-brand-mark">
+          <BrandLogo className="auth-logo" />
+        </div>
+
         <div className="auth-brand">
+          <span className="auth-eyebrow">Build consistency</span>
           <h1>FitTrack</h1>
-          <p>Create your account</p>
+          <p>Create your account to track sessions, monitor progress, and stay aligned with your goals.</p>
         </div>
 
         {error && <div className="alert alert-error" style={{ marginBottom: 20 }}>{error}</div>}

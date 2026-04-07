@@ -53,9 +53,14 @@ export default function WorkoutPage() {
 
   return (
     <div>
-      <div className="page-header">
-        <h1>Workout Tracking</h1>
-        <p>Select workout type</p>
+      <div className="page-header page-header-row">
+        <div>
+          <h1>Workout Tracking</h1>
+          <p>Browse categories, search your sessions, and add new activity without leaving the flow.</p>
+        </div>
+        <Link to="/workout/log" className="btn btn-primary page-header-button">
+          Log Workout
+        </Link>
       </div>
 
       <form className="workout-search" onSubmit={handleSearch}>
@@ -70,9 +75,7 @@ export default function WorkoutPage() {
 
       <div className="section-header">
         <span className="section-title">Workout Categories</span>
-        <Link to="/workout/log" className="btn btn-primary" style={{ fontSize: '0.8rem', padding: '8px 16px' }}>
-          + Log Workout
-        </Link>
+        <span className="section-meta">{selectedCategory || 'All categories'}</span>
       </div>
 
       <div className="category-grid">

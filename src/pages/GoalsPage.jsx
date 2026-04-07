@@ -106,13 +106,13 @@ export default function GoalsPage() {
 
   return (
     <div>
-      <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+      <div className="page-header page-header-row">
         <div>
           <h1>Goals</h1>
-          <p>Track your fitness targets</p>
+          <p>Set focused targets, monitor progress, and keep momentum visible.</p>
         </div>
-        <button className="btn btn-primary" onClick={openAdd} style={{ marginTop: 32 }}>
-          + Add
+        <button className="btn btn-primary page-header-button" onClick={openAdd}>
+          Add Goal
         </button>
       </div>
 

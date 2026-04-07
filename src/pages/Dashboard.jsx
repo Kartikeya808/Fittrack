@@ -8,6 +8,7 @@ export default function Dashboard() {
   const { user, logout } = useAuth();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const firstName = user?.name?.trim().split(/\s+/)[0] || 'Athlete';
 
   useEffect(() => {
     API.get('/api/stats/dashboard')
@@ -22,19 +23,16 @@ export default function Dashboard() {
 
   return (
     <div>
-      <div className="dashboard-header">
-        <div>
-          <h1>FitTrack</h1>
-          <p className="dashboard-subtitle">Dashboard</p>
+      <div className="dashboard-hero card">
+        <div className="dashboard-hero-content">
+          <span className="dashboard-eyebrow">Daily overview</span>
+          <h1>Welcome back, {firstName}</h1>
+          <p className="dashboard-subtitle">Review your activity, see what is scheduled, and keep your momentum moving forward.</p>
         </div>
-        <button className="logout-btn" onClick={logout}>Sign Out</button>
+        <button className="btn btn-secondary logout-btn" onClick={logout}>Sign Out</button>
       </div>
 
-      <div className="section-header" style={{ marginTop: 24 }}>
-        <span className="section-title">Quick Stats</span>
-      </div>
-
-      <div className="dashboard-stats">
+      <div className="dashboard-overview-grid">
         <div className="card stat-card">
           <span className="stat-label">Today's Activity</span>
           <div>
@@ -49,25 +47,27 @@ export default function Dashboard() {
             <span className="stat-unit">min</span>
           </div>
         </div>
-      </div>
 
-      <div className="section-header">
-        <span className="section-title">Today's Schedule</span>
-      </div>
-      <div className="card schedule-card">
-        {loading ? (
-          <div className="schedule-empty"><span className="spinner" /></div>
-        ) : data?.todaySchedule ? (
-          <div className="schedule-workout">
-            <div>
-              <div className="schedule-type">{data.todaySchedule.type}</div>
-              <div className="schedule-meta">{data.todaySchedule.duration} min &middot; {data.todaySchedule.intensity}</div>
-            </div>
-            <span className="workout-entry-duration">{formatDate(data.todaySchedule.date)}</span>
+        <div className="card schedule-card">
+          <div className="schedule-card-header">
+            <span className="section-title">Today's Schedule</span>
+            <span className="schedule-chip">{loading ? 'Updating' : data?.todaySchedule ? 'Planned' : 'Open'}</span>
           </div>
-        ) : (
-          <div className="schedule-empty">No workouts scheduled</div>
-        )}
+
+          {loading ? (
+            <div className="schedule-empty"><span className="spinner" /></div>
+          ) : data?.todaySchedule ? (
+            <div className="schedule-workout">
+              <div>
+                <div className="schedule-type">{data.todaySchedule.type}</div>
+                <div className="schedule-meta">{data.todaySchedule.duration} min &middot; {data.todaySchedule.intensity}</div>
+              </div>
+              <span className="workout-entry-duration">{formatDate(data.todaySchedule.date)}</span>
+            </div>
+          ) : (
+            <div className="schedule-empty">No workout is scheduled yet for today.</div>
+          )}
+        </div>
       </div>
 
       <div className="section-header">
@@ -96,10 +96,10 @@ export default function Dashboard() {
       </div>
 
       <div className="dashboard-actions">
-        <Link to="/workout/log" className="btn btn-primary btn-lg" style={{ flex: 1 }}>
+        <Link to="/workout/log" className="btn btn-primary btn-lg">
           Start Quick Workout
         </Link>
-        <Link to="/workout" className="btn btn-ghost">View All</Link>
+        <Link to="/workout" className="btn btn-secondary">View All Workouts</Link>
       </div>
     </div>
   );

@@ -4,26 +4,27 @@
 }
 
 .goal-card {
-  padding: 20px;
-  margin-bottom: 12px;
+  padding: 22px;
+  margin-bottom: 14px;
 }
 
 .goal-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 12px;
+  gap: 16px;
+  margin-bottom: 14px;
 }
 
 .goal-title {
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.02rem;
+  font-weight: 700;
 }
 
 .goal-target {
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .goal-progress-row {
@@ -38,9 +39,9 @@
 
 .goal-percent {
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-secondary);
-  min-width: 60px;
+  min-width: 86px;
   text-align: right;
 }
 
@@ -48,31 +49,32 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  margin-bottom: 8px;
+  gap: 16px;
+  padding: 18px 20px;
+  margin-bottom: 10px;
 }
 
 .suggested-title {
-  font-weight: 500;
-  font-size: 0.9rem;
+  font-weight: 600;
+  font-size: 0.94rem;
 }
 
 .add-goal-btn {
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   color: var(--accent);
-  font-weight: 600;
-  transition: opacity var(--transition);
+  font-weight: 700;
+  transition: opacity var(--transition), transform var(--transition);
 }
 
 .add-goal-btn:hover {
-  opacity: 0.7;
+  opacity: 0.78;
+  transform: translateY(-1px);
 }
 
-/* Modal Overlay */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(15, 23, 42, 0.36);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,17 +84,19 @@
 }
 
 .modal-card {
-  background: var(--bg-card);
+  background: rgba(255, 255, 255, 0.94);
   border-radius: var(--radius-xl);
   padding: 32px;
   width: 100%;
-  max-width: 440px;
+  max-width: 480px;
+  border: 1px solid rgba(217, 226, 236, 0.96);
   box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(18px);
   animation: slideUp 200ms ease;
 }
 
 .modal-card h2 {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
   margin-bottom: 24px;
 }
@@ -119,7 +123,25 @@
 
 .empty-state {
   text-align: center;
-  padding: 40px 0;
+  padding: 48px 0;
   color: var(--text-muted);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  .goal-header,
+  .suggested-card,
+  .modal-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .goal-progress-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .goal-percent {
+    text-align: left;
+  }
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import API from '../api/axios';
+import { saveDemoWorkout } from '../demoStore';
 import './LogWorkout.css';
 
 const TYPES = ['Cardio', 'Strength', 'Yoga/Stretching', 'Sports', 'Walking/Running', 'Custom'];
@@ -38,7 +38,7 @@ export default function LogWorkout() {
 
     setLoading(true);
     try {
-      await API.post('/api/workouts', {
+      saveDemoWorkout({
         type: form.type,
         duration: parseInt(form.duration),
         intensity: form.intensity,
@@ -47,8 +47,6 @@ export default function LogWorkout() {
         notes: form.notes,
       });
       setSuccess(true);
-    } catch (err) {
-      setError(err.response?.data?.message || 'Failed to save workout');
     } finally {
       setLoading(false);
     }

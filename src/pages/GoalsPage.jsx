@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import API from '../api/axios';
+import { createDemoGoal, deleteDemoGoal, getDemoGoals, updateDemoGoal } from '../demoStore';
 import './GoalsPage.css';
 
 const SUGGESTED_GOALS = [
@@ -21,14 +21,8 @@ export default function GoalsPage() {
   }, []);
 
   const fetchGoals = async () => {
-    try {
-      const res = await API.get('/api/goals');
-      setGoals(res.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+    setGoals(getDemoGoals());
+    setLoading(false);
   };
 
   const openAdd = () => {
@@ -55,14 +49,14 @@ export default function GoalsPage() {
 
     try {
       if (editingGoal) {
-        await API.put(`/api/goals/${editingGoal._id}`, {
+        updateDemoGoal(editingGoal._id, {
           title: form.title,
           target: parseInt(form.target),
           current: parseInt(form.current) || 0,
           unit: form.unit,
         });
       } else {
-        await API.post('/api/goals', {
+        createDemoGoal({
           title: form.title,
           target: parseInt(form.target),
           current: parseInt(form.current) || 0,
@@ -77,26 +71,18 @@ export default function GoalsPage() {
   };
 
   const handleDelete = async (id) => {
-    try {
-      await API.delete(`/api/goals/${id}`);
-      fetchGoals();
-    } catch (err) {
-      console.error(err);
-    }
+    deleteDemoGoal(id);
+    fetchGoals();
   };
 
   const addSuggested = async (suggestion) => {
-    try {
-      await API.post('/api/goals', {
-        title: suggestion.title,
-        target: suggestion.target,
-        current: 0,
-        unit: suggestion.unit,
-      });
-      fetchGoals();
-    } catch (err) {
-      console.error(err);
-    }
+    createDemoGoal({
+      title: suggestion.title,
+      target: suggestion.target,
+      current: 0,
+      unit: suggestion.unit,
+    });
+    fetchGoals();
   };
 
   const getPercent = (current, target) => {

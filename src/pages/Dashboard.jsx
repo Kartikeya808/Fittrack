@@ -1,20 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import API from '../api/axios';
+import { getDemoDashboard } from '../demoStore';
 import './Dashboard.css';
 
 export default function Dashboard() {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const firstName = user?.name?.trim().split(/\s+/)[0] || 'Athlete';
 
   useEffect(() => {
-    API.get('/api/stats/dashboard')
-      .then((res) => setData(res.data))
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    setData(getDemoDashboard());
+    setLoading(false);
   }, []);
 
   const formatDate = (dateStr) => {
@@ -29,7 +27,7 @@ export default function Dashboard() {
           <h1>Welcome back, {firstName}</h1>
           <p className="dashboard-subtitle">Review your activity, see what is scheduled, and keep your momentum moving forward.</p>
         </div>
-        <button className="btn btn-secondary logout-btn" onClick={logout}>Sign Out</button>
+        <div className="btn btn-secondary logout-btn" aria-hidden="true">Demo Mode</div>
       </div>
 
       <div className="dashboard-overview-grid">

@@ -6,9 +6,7 @@ import { AuthProvider } from './src/context/AuthContext';
 import Dashboard from './src/pages/Dashboard';
 import GoalsPage from './src/pages/GoalsPage';
 import LogWorkout from './src/pages/LogWorkout';
-import LoginPage from './src/pages/LoginPage';
 import ProgressPage from './src/pages/ProgressPage';
-import RegisterPage from './src/pages/RegisterPage';
 import WorkoutPage from './src/pages/WorkoutPage';
 
 export default function App() {
@@ -16,8 +14,8 @@ export default function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<Navigate to="/" replace />} />
+          <Route path="/register" element={<Navigate to="/" replace />} />
           <Route
             element={
               <ProtectedRoute>

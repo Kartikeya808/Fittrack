@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import API from '../api/axios';
+import { getDemoProgress } from '../demoStore';
 import './ProgressPage.css';
 
 export default function ProgressPage() {
@@ -10,10 +10,8 @@ export default function ProgressPage() {
 
   useEffect(() => {
     setLoading(true);
-    API.get(`/api/stats/progress?period=${period}`)
-      .then((res) => setData(res.data))
-      .catch(() => {})
-      .finally(() => setLoading(false));
+    setData(getDemoProgress(period));
+    setLoading(false);
   }, [period]);
 
   const summary = data?.summary || { totalTime: 0, totalSessions: 0, avgDuration: 0, totalCalories: 0 };

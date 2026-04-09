@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import API from '../api/axios';
+import { getDemoWorkouts } from '../demoStore';
 import './WorkoutPage.css';
 
 const CATEGORIES = [
@@ -23,17 +23,18 @@ export default function WorkoutPage() {
   }, [selectedCategory]);
 
   const fetchWorkouts = async () => {
-    try {
-      const params = {};
-      if (selectedCategory) params.type = selectedCategory;
-      if (search) params.search = search;
-      const res = await API.get('/api/workouts', { params });
-      setWorkouts(res.data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
+    const normalizedSearch = search.trim().toLowerCase();
+    const nextWorkouts = getDemoWorkouts().filter((workout) => {
+      const matchesCategory = !selectedCategory || workout.type === selectedCategory;
+      const matchesSearch = !normalizedSearch
+        || workout.type.toLowerCase().includes(normalizedSearch)
+        || workout.notes?.toLowerCase().includes(normalizedSearch);
+
+      return matchesCategory && matchesSearch;
+    });
+
+    setWorkouts(nextWorkouts);
+    setLoading(false);
   };
 
   const handleSearch = (e) => {
